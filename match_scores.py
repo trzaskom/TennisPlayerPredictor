@@ -1,6 +1,8 @@
 import sys
 from functions import scrape_year, scrape_tourney, array2csv
 
+import mysql.connector
+import datetime
 # Command line input
 start_year = str(sys.argv[1])
 end_year = str(sys.argv[2])
@@ -48,5 +50,5 @@ for h in xrange(int(start_year), int(end_year) + 1):
             print year + '    ' + str(tourney_data_scrape[i][1]) + spacing1 + '    ' + tourney_data_scrape[i][2] + spacing2 + ' ' + str(len(match_data_scrape))
 
         filename = "match_scores_" + start_year + "-" + end_year
-        array2csv(tourney_match, filename)
-        
+        #array2csv(tourney_match, filename)
+print tourney_match
