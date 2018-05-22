@@ -1,5 +1,9 @@
+import datetime
 import sys
-from functions import html_parse_tree, xpath_parse, regex_strip_array, read_csv, array2csv
+
+import mysql.connector
+
+from functions import html_parse_tree, xpath_parse, regex_strip_array, read_csv
 
 start_index = int(sys.argv[1])
 end_index = int(sys.argv[2])
@@ -92,6 +96,34 @@ for h in xrange(start_index, end_index + 1):
         rankings.append(data)
 
         filename = 'rankings_' + str(h) + '_' + week
-        array2csv(rankings, filename)
-
+        # array2csv(rankings, filename)
     print str(h) + "        " + week
+
+cnx = mysql.connector.connect(user='root', password='', host='127.0.0.1', database='tennisapp')
+cursor = cnx.cursor()
+
+add_player = "INSERT INTO players (player_key, name, age, points) VALUES (%s, %s, %s, %s)"
+
+# creating logs and append into logs/main_logs.log
+time = str(datetime.datetime.now()).split(' ')
+time = str(time[0] + '_' + time[1]).split('.')[0].replace(':', '_')
+log_sql_file_name = 'load_data_' + time + '.log'
+
+# append data to table players
+for elem in rankings:
+    name = str(elem[12]).split("-")[0].title() + ' ' + str(elem[12]).split("-")[1].title()
+    cursor.execute(add_player, (elem[13], name, elem[8], elem[9]))
+
+with open('logs/' + log_sql_file_name, "w") as log_sql_file:
+    for elem in rankings:
+        name = str(elem[12]).split("-")[0].title() + ' ' + str(elem[12]).split("-")[1].title()
+        log_sql_file.write('INSERT INTO players (player_key, name, age, points) VALUES (' + '"' + elem[
+            13] + '"' + ',' + '"' + name + '"' + ',' + '"' + str(elem[8]) + '"' + ',' + '"' + str(
+            elem[9]) + '"' + ");" + "\n")
+
+with open('logs/main_logs.log', "a") as log_file:
+    log_file.write(time + ' - loading data about players into database with SQL file: ' + log_sql_file_name + '\n')
+
+cnx.commit()
+cursor.close()
+cnx.close()
