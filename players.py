@@ -15,12 +15,12 @@ players = [[0 for x in range(4)] for y in range(len(names))]
 for i in range(0, len(names)):
     players[i][0] = names[i].a.get_text().strip()
     players[i][1] = ages[i].get_text().strip()
-    players[i][2] = points[i].get_text().strip()
+    players[i][2] = points[i].get_text().strip().replace(',', '')
     players[i][3] = str(names[i].a["href"]).split('/')[4]
 
 cnx = mysql.connector.connect(user='root', password='', host='127.0.0.1', database='tennisapp')
 cursor = cnx.cursor()
-add_player = "INSERT INTO players (player_key, name, age, points) VALUES (%s, %s, %s, %s)"
+add_player = 'INSERT INTO players (player_key, name, age, points) VALUES (%s, %s, %s, %s)'
 
 # append data to players table
 for player in players:
