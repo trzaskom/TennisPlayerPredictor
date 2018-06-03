@@ -1,44 +1,66 @@
 <div class="" *ngIf="players; else loading">
 
-  <ul class="pagination">
-    <li class="disabled"><a href="#!"><i class="material-icons"><</i></a></li>
-    <li class="active"><a href="#!">1</a></li>
-    <li class="waves-effect"><a href="#!">2</a></li>
-    <li class="waves-effect"><a href="#!">3</a></li>
-    <li class="waves-effect"><a href="#!">4</a></li>
-    <li class="waves-effect"><a href="#!">5</a></li>
-    <li class="waves-effect"><a href="#!"><i class="material-icons">></i></a></li>
+  <ul class="pagination center">
+    <li class="disabled">
+      <a href="#!">
+        <i class="material-icons">
+          <</i>
+      </a>
+    </li>
+    <li class="active">
+      <a href="#!">1</a>
+    </li>
+    <li class="waves-effect">
+      <a href="#!">2</a>
+    </li>
+    <li class="waves-effect">
+      <a href="#!">3</a>
+    </li>
+    <li class="waves-effect">
+      <a href="#!">4</a>
+    </li>
+    <li class="waves-effect">
+      <a href="#!">5</a>
+    </li>
+    <li class="waves-effect">
+      <a href="#!">
+        <i class="material-icons">></i>
+      </a>
+    </li>
   </ul>
   <div class="" *ngIf="!currentPage; else loading">
+    <div class="row">
+      <div class="col s12 m8 offset-m2">
+        <table mat-table [dataSource]="players" class="mat-elevation-z8">
+          <!-- Name Column -->
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef> Name </th>
+            <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+          </ng-container>
+          <!-- Age Column -->
+          <ng-container matColumnDef="age">
+            <th mat-header-cell *matHeaderCellDef> Age </th>
+            <td mat-cell *matCellDef="let element"> {{element.age}} </td>
+          </ng-container>
+          <!-- Points Column -->
+          <ng-container matColumnDef="points">
+            <th mat-header-cell *matHeaderCellDef> Points </th>
+            <td mat-cell *matCellDef="let element"> {{element.points}} </td>
+          </ng-container>
+          <!-- Player_key Column -->
+          <ng-container matColumnDef="player_key">
+            <th mat-header-cell *matHeaderCellDef> Player Details </th>
+            <td mat-cell *matCellDef="let element">
+              <button routerLink='/player/{{element.player_key}}' class="indigo lighten-2 waves-effect waves-light btn">Select</button>
+            </td>
+          </ng-container>
 
-  <table mat-table [dataSource]="players" class="mat-elevation-z8">
-    <!-- Name Column -->
-    <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef> Name </th>
-      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-    </ng-container>
-    <!-- Age Column -->
-    <ng-container matColumnDef="age">
-      <th mat-header-cell *matHeaderCellDef> Age </th>
-      <td mat-cell *matCellDef="let element"> {{element.age}} </td>
-    </ng-container>
-    <!-- Points Column -->
-    <ng-container matColumnDef="points">
-      <th mat-header-cell *matHeaderCellDef> Points </th>
-      <td mat-cell *matCellDef="let element"> {{element.points}} </td>
-    </ng-container>
-    <!-- Player_key Column -->
-    <ng-container matColumnDef="player_key">
-      <th mat-header-cell *matHeaderCellDef> Player Details </th>
-      <td mat-cell *matCellDef="let element">
-        <button routerLink='/player/{{element.player_key}}' class=" indigo lighten-2 waves-effect waves-light btn">Select</button>
-      </td>
-    </ng-container>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
 
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  </table>
-
+      </div>
+    </div>
   </div>
   <!--
   <table class="responsive-table">
@@ -68,5 +90,21 @@
 -->
 </div>
 <ng-template #loading>
-  <div>Loading players data...</div>
+  <div class="row">
+    <div class="col s12 m6 offset-m3 center">
+      <div class="preloader-wrapper big active">
+        <div class="spinner-layer spinner-blue-only">
+          <div class="circle-clipper left">
+            <div class="circle"></div>
+          </div>
+          <div class="gap-patch">
+            <div class="circle"></div>
+          </div>
+          <div class="circle-clipper right">
+            <div class="circle"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </ng-template>

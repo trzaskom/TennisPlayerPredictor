@@ -3,6 +3,8 @@ import { PlayersService } from '../players.service';
 import { Player } from '../player';
 import { MatTableModule } from '@angular/material/table';
 
+import { MatTableDataSource } from '@angular/material';
+
 
 @Component({
   selector: 'app-players',
@@ -12,7 +14,6 @@ import { MatTableModule } from '@angular/material/table';
 export class PlayersComponent implements OnInit {
 
   players: Player[];
-
   pages: number;
   currentPage: number;
   playersPerPage: number;
@@ -28,6 +29,7 @@ export class PlayersComponent implements OnInit {
     this.currentPage = this.playersService.searchSetting.whichPage;
     this.playersPerPage = this.playersService.searchSetting.playersPerPage;
   }
+
 
   applyFilter(filterValue: string) {
     console.log(filterValue);

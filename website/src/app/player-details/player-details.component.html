@@ -1,9 +1,43 @@
 <div class="" *ngIf="player; else loadingData">
-  <p>Name: {{player.name}}</p>
-  <p>Age: {{player.age}}</p>
-  <p>Points: {{player.points}}</p>
+  <div class="row">
+    <div class="col s12 m6 offset-m3">
+      <div class="card blue-grey darken-2">
+        <div class="card-content white-text center">
+          <span class="card-title">Name: {{player.name}}</span>
+          <p>Age: {{player.age}}</p>
+          <p>Points: {{player.points}}</p>
+        </div>
+        <div class="card-action center">
+          <button (click)="toggle()" class="indigo lighten-2 waves-effect waves-light btn-large btn-margin-10 btn-text">Stats</button>
+          <button class="indigo lighten-2 waves-effect waves-light btn-large btn-margin-10 btn-text">Report</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="center-align" *ngIf="statsExpanded">
+    <app-drav-hexagon [playerStats]='playerStats'></app-drav-hexagon>
+  </div>
 </div>
 
 <ng-template #loadingData>
-  <div>Loading player data...</div>
+  <div class="row">
+    <div class="valign-wrapper">
+      <h5>This should be vertically aligned</h5>
+    </div>
+    <div class="col s12 m6 offset-m3 center">
+      <div class="preloader-wrapper big active">
+        <div class="spinner-layer spinner-blue-only">
+          <div class="circle-clipper left">
+            <div class="circle"></div>
+          </div>
+          <div class="gap-patch">
+            <div class="circle"></div>
+          </div>
+          <div class="circle-clipper right">
+            <div class="circle"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </ng-template>
