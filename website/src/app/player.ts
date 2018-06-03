@@ -1,5 +1,5 @@
 export interface Player {
-  playerKey: string;
+  player_key: string;
   name: string;
   age: number;
   points: number;

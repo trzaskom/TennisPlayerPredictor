@@ -17,11 +17,32 @@ var connection = mysql.createConnection({
 });
 
 app.use(json_body_parser);
-app.use('/api', router);
-
+// Add headers
 app.use(function (req, res, next) {
+
   // Website you wish to allow to connect
   res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200');
+
+  // Request methods you wish to allow
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+
+  // Request headers you wish to allow
+  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+
+  // Set to true if you need the website to include cookies in the requests sent
+  // to the API (e.g. in case you use sessions)
+  res.setHeader('Access-Control-Allow-Credentials', true);
+
+  // Pass to next layer of middleware
+  next();
+});
+app.use('/api', router);
+
+
+/*
+app.use(function (req, res, next) {
+  // Website you wish to allow to connect
+  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200/*');
     // Request methods you wish to allow
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
     // Request headers you wish to allow
@@ -33,20 +54,16 @@ app.use(function (req, res, next) {
   next();
   });
 app.use(cors({origin: 'http://localhost:4200'}));
+*/
 
-app.listen(port, () => {
-  console.log('Server started at port 3000!');
-  connection.connect();
-});
-
-router.route('/players').get((req, res, next) => {
+router.route('/players').get((req, res) => {
   const query = 'SELECT * FROM players ORDER BY points DESC';
 
-  connection.query(query, (err, rows, fields) => {
+  connection.query(query, (err, rows) => {
     if (err) {
       throw err;
     }
-    res.status(200).send(rows);
+    res.json(rows);
   });
 });
 
@@ -59,4 +76,9 @@ router.route('/players/:id').get((req, res, next) => {
     }
     res.status(200).send(rows);
   });
+});
+
+app.listen(port, () => {
+  console.log('Server started at port 3000!');
+  connection.connect();
 });
