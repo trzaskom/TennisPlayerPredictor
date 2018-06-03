@@ -1,0 +1,9 @@
+<div class="" *ngIf="player; else loadingData">
+  <p>Name: {{player.name}}</p>
+  <p>Age: {{player.age}}</p>
+  <p>Points: {{player.points}}</p>
+</div>
+
+<ng-template #loadingData>
+  <div>Loading player data...</div>
+</ng-template>

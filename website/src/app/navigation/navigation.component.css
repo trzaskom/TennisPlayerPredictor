@@ -1,0 +1,16 @@
+mat-toolbar {
+  background-color: #7986cb;
+  padding: 20px 10px;
+}
+
+.nav-btn {
+  margin: 10px 10px;
+  min-width: 100px;
+  min-height: 60px;
+}
+
+.nav-btn-text {
+  font-weight: bold;
+  font-size: 24px;
+  margin: 5px 5px;
+}
