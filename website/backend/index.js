@@ -57,7 +57,7 @@ app.use(cors({origin: 'http://localhost:4200'}));
 */
 
 router.route('/players').get((req, res) => {
-  const query = 'SELECT * FROM players ORDER BY points DESC';
+  const query = 'SELECT * FROM players ORDER BY points DESC LIMIT 100';
 
   connection.query(query, (err, rows) => {
     if (err) {
