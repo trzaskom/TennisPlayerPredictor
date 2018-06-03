@@ -27,7 +27,7 @@ const routes: Routes = [
     component: PlayersComponent
   },
   {
-    path: 'players/:id',
+    path: 'player/:id',
     component: PlayerDetailsComponent
   },
   {
@@ -57,8 +57,8 @@ const routes: Routes = [
   ],
   imports: [
     BrowserModule,
-    MaterialModule,
     HttpClientModule,
+    MaterialModule,
     RouterModule.forRoot(routes)
   ],
   exports: [
