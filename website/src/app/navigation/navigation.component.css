@@ -1,6 +1,7 @@
 mat-toolbar {
   background-color: #7986cb;
   padding: 20px 10px;
+  margin-bottom: 20px;
 }
 
 .nav-btn {

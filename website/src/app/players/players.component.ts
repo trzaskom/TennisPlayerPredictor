@@ -14,9 +14,9 @@ import { MatTableDataSource } from '@angular/material';
 export class PlayersComponent implements OnInit {
 
   players: Player[];
-  pages: number;
-  currentPage: number;
-  playersPerPage: number;
+  // pages: number;
+  // currentPage: number;
+  // playersPerPage: number;
   displayedColumns = ['name', 'age', 'points', 'player_key'];
 
   constructor(private playersService: PlayersService) {
@@ -26,15 +26,17 @@ export class PlayersComponent implements OnInit {
     this.playersService.getAllPlayers().subscribe(allPlayers => {
       this.players = allPlayers;
     });
+    /*
     this.currentPage = this.playersService.searchSetting.whichPage;
     this.playersPerPage = this.playersService.searchSetting.playersPerPage;
+    */
   }
 
-
+  /*
   applyFilter(filterValue: string) {
     console.log(filterValue);
   }
-  /*
+
   applyFilter(filterValue: string) {
     filterValue = filterValue.trim(); // Remove whitespace
     filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches

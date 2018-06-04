@@ -1,4 +1,3 @@
-
 import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -15,10 +14,12 @@ export class PlayersService {
   constructor(private http: HttpClient) {
   }
 
+  /*
   searchSetting = {
     whichPage: 0,
     playersPerPage: 10
   };
+  */
 
   createHeader() {
     const headerOptions = new HttpHeaders();

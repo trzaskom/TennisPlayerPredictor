@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { TournamentsService } from './../tournaments.service';
+import { Tournament } from '../tournament';
 
 @Component({
   selector: 'app-tournaments',
@@ -7,9 +9,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TournamentsComponent implements OnInit {
 
-  constructor() { }
+  tournaments: Tournament[];
+  displayedColumns = ['tournamentName', 'location', 'placement', 'surface', 'winnerName'];
+
+  constructor(private tournamentsService: TournamentsService) { }
 
   ngOnInit() {
+    this.tournamentsService.getAllTournaments().subscribe(allTournaments => {
+      console.log(allTournaments);
+      this.tournaments = allTournaments;
+    });
   }
 
 }

@@ -9,12 +9,12 @@
         </div>
         <div class="card-action center">
           <button (click)="toggle()" class="indigo lighten-2 waves-effect waves-light btn-large btn-margin-10 btn-text">Stats</button>
-          <button class="indigo lighten-2 waves-effect waves-light btn-large btn-margin-10 btn-text">Report</button>
+          <button (click)="playerReport()" class="indigo lighten-2 waves-effect waves-light btn-large btn-margin-10 btn-text">Report</button>
         </div>
       </div>
     </div>
   </div>
-  <div class="row ">
+  <div class="row" #playerStatist>
     <div class="col s12 m8 offset-m2">
       <div class="center-align font-medium" *ngIf="statsExpanded">
         <table class="centered responsive-table">

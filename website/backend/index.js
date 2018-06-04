@@ -89,6 +89,17 @@ router.route('/playerstats/:id').get((req, res, next) => {
   });
 });
 
+router.route('/tournaments').get((req, res) => {
+  const query = 'SELECT tournament_name AS tournamentName, location, placement, surface, name AS winnerName FROM ( SELECT * FROM tournaments as t LEFT JOIN ( SELECT * FROM players ) AS p ON t.winner_id = p.player_key ) AS wyn';
+
+  connection.query(query, (err, rows) => {
+    if (err) {
+      throw err;
+    }
+    res.json(rows);
+  });
+});
+
 app.listen(port, () => {
   console.log('Server started at port 3000!');
   connection.connect();

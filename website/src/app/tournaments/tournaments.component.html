@@ -1,3 +1,84 @@
-<p>
-  tournaments works!
-</p>
+<div *ngIf="tournaments; else loadingTournaments">
+  <!--
+    <div class="" *ngIf="!currentPage; else loading">
+    -->
+  <div class="row">
+    <div class="col s12 m10 offset-m1">
+      <table mat-table [dataSource]="tournaments" class="mat-elevation-z8">
+        <!-- Tournament Name Column -->
+        <ng-container matColumnDef="tournamentName">
+          <th mat-header-cell *matHeaderCellDef> Tournament Name </th>
+          <td mat-cell *matCellDef="let element"> {{element.tournamentName}} </td>
+        </ng-container>
+        <!-- Tournament Location Column -->
+        <ng-container matColumnDef="location">
+          <th mat-header-cell *matHeaderCellDef> Location </th>
+          <td mat-cell *matCellDef="let element"> {{element.location}} </td>
+        </ng-container>
+        <!-- Tournament Placement Column -->
+        <ng-container matColumnDef="placement">
+          <th mat-header-cell *matHeaderCellDef> Placement </th>
+          <td mat-cell *matCellDef="let element"> {{element.placement}} </td>
+        </ng-container>
+        <!-- Tournament Surface Column -->
+        <ng-container matColumnDef="surface">
+          <th mat-header-cell *matHeaderCellDef> Surface </th>
+          <td mat-cell *matCellDef="let element"> {{element.surface}} </td>
+        </ng-container>
+        <!-- Tournament Winner Name Column -->
+        <ng-container matColumnDef="winnerName">
+          <th mat-header-cell *matHeaderCellDef> Winner Name </th>
+          <td mat-cell *matCellDef="let element"> {{element.winnerName}} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns" class="table-header-color"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    </div>
+  </div>
+</div>
+<!--
+  <table class="responsive-table">
+    <thead>
+      <tr>
+        <td>index</td>
+        <td>Name</td>
+        <td>Age</td>
+        <td>Points</td>
+        <td>Check Details</td>
+      </tr>
+    </thead>
+    <div *ngFor="let player of players; let idx = index">
+      <tbody>
+        <tr>
+          <td>{{idx}}</td>
+          <td>{{player.name}}</td>
+          <td>{{player.age}}</td>
+          <td>{{player.points}}</td>
+          <td>
+            <button routerLink='/player/{{player.player_key}}'>Check player</button>
+          </td>
+        </tr>
+      </tbody>
+    </div>
+  </table>
+-->
+<ng-template #loadingTournaments>
+  <div class="row">
+    <div class="col s12 m6 offset-m3 center">
+      <div class="preloader-wrapper big active">
+        <div class="spinner-layer spinner-blue-only">
+          <div class="circle-clipper left">
+            <div class="circle"></div>
+          </div>
+          <div class="gap-patch">
+            <div class="circle"></div>
+          </div>
+          <div class="circle-clipper right">
+            <div class="circle"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>

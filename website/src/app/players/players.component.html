@@ -1,4 +1,4 @@
-<div *ngIf="players; else loading">
+<div *ngIf="players; else loadingPlayers">
 
   <!--
     <div class="" *ngIf="!currentPage; else loading">
@@ -29,7 +29,7 @@
           </td>
         </ng-container>
 
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns" class="table-header-color"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
       </table>
 
@@ -62,7 +62,7 @@
     </div>
   </table>
 -->
-<ng-template #loading>
+<ng-template #loadingPlayers>
   <div class="row">
     <div class="col s12 m6 offset-m3 center">
       <div class="preloader-wrapper big active">

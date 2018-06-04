@@ -18,6 +18,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { PlayersService } from './players.service';
 import { DravHexagonComponent } from './drav-hexagon/drav-hexagon.component';
 import { ExportToPdfComponent } from './export-to-pdf/export-to-pdf.component';
+import { TournamentsService } from './tournaments.service';
 
 const routes: Routes = [
   {
@@ -68,7 +69,8 @@ const routes: Routes = [
   exports: [
   ],
   providers: [
-    PlayersService
+    PlayersService,
+    TournamentsService
   ],
   bootstrap: [
     AppComponent
