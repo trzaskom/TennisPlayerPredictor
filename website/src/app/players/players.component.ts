@@ -1,10 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+
 import { PlayersService } from '../players.service';
 import { Player } from '../player';
+
 import { MatTableModule } from '@angular/material/table';
-
 import { MatTableDataSource } from '@angular/material';
-
 
 @Component({
   selector: 'app-players',

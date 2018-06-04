@@ -17,6 +17,7 @@ import { PlayerDetailsComponent } from './player-details/player-details.componen
 import { HttpClientModule } from '@angular/common/http';
 import { PlayersService } from './players.service';
 import { DravHexagonComponent } from './drav-hexagon/drav-hexagon.component';
+import { ExportToPdfComponent } from './export-to-pdf/export-to-pdf.component';
 
 const routes: Routes = [
   {
@@ -55,7 +56,8 @@ const routes: Routes = [
     ReportsComponent,
     PageNotFoundComponent,
     PlayerDetailsComponent,
-    DravHexagonComponent
+    DravHexagonComponent,
+    ExportToPdfComponent
   ],
   imports: [
     BrowserModule,

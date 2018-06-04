@@ -1,0 +1,81 @@
+<div class="row">
+  <div class="col s12 m8 offset-m2">
+    <ul class="collection with-header">
+
+      <li class="collection-header center-align">
+        <h4>Available reports</h4>
+      </li>
+
+      <!-- Players -->
+      <li class="collection-item">
+        <div #playersContent class="center-align">
+
+          <div *ngIf="players; else loadingPlayers">
+            <p class="flow-text">
+              Generate raport for 100 best players
+            </p>
+            <button (click)="downloadPlayersPdf()" class="indigo darken-2 waves-effect waves-light btn export-button">Players</button>
+          </div>
+
+          <ng-template #loadingPlayers>
+            <div class="row">
+              <div class="col s12 m6 offset-m3 center">
+                <div class="preloader-wrapper big active">
+                  <div class="spinner-layer spinner-blue-only">
+                    <div class="circle-clipper left">
+                      <div class="circle"></div>
+                    </div>
+                    <div class="gap-patch">
+                      <div class="circle"></div>
+                    </div>
+                    <div class="circle-clipper right">
+                      <div class="circle"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ng-template>
+
+        </div>
+      </li>
+      <!-- End of Players -->
+
+      <!-- Tournaments -->
+      <li class="collection-item">
+        <div #tournamentsContent class="center-align">
+
+          <div *ngIf="tournaments; else loadingTournaments">
+            <p class="flow-text">
+              Generate raport for 100 best players
+            </p>
+            NOT WORKING YET <br>
+            <button (click)="downloadTournamentsPdf()" class="indigo darken-2 waves-effect waves-light btn export-button">Tournaments</button>
+          </div>
+
+          <ng-template #loadingTournaments>
+            <div class="row">
+              <div class="col s12 m6 offset-m3 center">
+                <div class="preloader-wrapper big active">
+                  <div class="spinner-layer spinner-blue-only">
+                    <div class="circle-clipper left">
+                      <div class="circle"></div>
+                    </div>
+                    <div class="gap-patch">
+                      <div class="circle"></div>
+                    </div>
+                    <div class="circle-clipper right">
+                      <div class="circle"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ng-template>
+
+        </div>
+      </li>
+      <!-- End of Tournaments -->
+    </ul>
+  </div>
+</div>
