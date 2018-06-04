@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Player } from '../player';
+import { PlayerStats } from '../player-stats';
 import { PlayersService } from '../players.service';
 import { ActivatedRoute } from '@angular/router';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
@@ -13,7 +14,7 @@ export class PlayerDetailsComponent implements OnInit {
 
   player: Player;
   playerId: string;
-  playerStats: number[];
+  playerStats: PlayerStats;
   statsExpanded = false;
   constructor(private playersService: PlayersService, private route: ActivatedRoute) {
   }
@@ -24,10 +25,13 @@ export class PlayerDetailsComponent implements OnInit {
     this.playersService.getOnePlayer(this.playerId).subscribe(onePlayer => {
       this.player = onePlayer[0];
     });
-    this.playerStats = [10, 20, 40, 50, 50, 90];
+    this.playersService.getPlayerStats(this.playerId).subscribe(onePlayerStats => {
+      this.playerStats = onePlayerStats[0];
+    });
   }
 
   toggle() {
     this.statsExpanded = !this.statsExpanded;
+    console.log(this.playerStats);
   }
 }
