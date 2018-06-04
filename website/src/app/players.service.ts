@@ -1,8 +1,9 @@
+
 import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Player } from './player';
-
+import { PlayerStats } from './player-stats';
 
 @Injectable({
   providedIn: 'root'
@@ -32,6 +33,11 @@ export class PlayersService {
   }
 
   getOnePlayer(id: string): Observable<Player> {
-    return this.http.get<Player>(this.apiPath + 'players/' + id, { headers: this.createHeader() });
+    return this.http.get<Player>(this.apiPath + 'player/' + id, { headers: this.createHeader() });
   }
+
+  getPlayerStats(id: string): Observable<PlayerStats> {
+    return this.http.get<PlayerStats>(this.apiPath + 'playerstats/' + id, { headers: this.createHeader() });
+  }
+
 }

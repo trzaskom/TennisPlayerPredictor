@@ -67,8 +67,19 @@ router.route('/players').get((req, res) => {
   });
 });
 
-router.route('/players/:id').get((req, res, next) => {
+router.route('/player/:id').get((req, res, next) => {
   const query = 'SELECT * FROM players WHERE player_key = "' + req.params.id + '"';
+
+  connection.query(query, (err, rows, fields) => {
+    if (err) {
+      throw err;
+    }
+    res.status(200).send(rows);
+  });
+});
+
+router.route('/playerstats/:id').get((req, res, next) => {
+  const query = 'SELECT * FROM ratios WHERE player_id = "' + req.params.id + '"';
 
   connection.query(query, (err, rows, fields) => {
     if (err) {
