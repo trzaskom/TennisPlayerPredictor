@@ -4,7 +4,7 @@
       <div class="card blue-grey darken-2">
         <div class="card-content white-text center font-big">
           <span class="font-big-title">{{player.name}}</span>
-          <p>{{player.age}} years</p>
+          <p>{{player.age}} years old</p>
           <p>{{player.points}} ranking points</p>
         </div>
         <div class="card-action center">
@@ -40,6 +40,13 @@
           </tbody>
         </table>
         <app-drav-hexagon [playerStats]='playerStats'></app-drav-hexagon>
+        <div *ngIf="messages">
+
+          <div *ngFor="let message of messages" class="collection">
+            <div class="collection-item font-medium-bold">{{message}}</div>
+          </div>
+
+        </div>
       </div>
     </div>
   </div>

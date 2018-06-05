@@ -18,6 +18,19 @@ export class PlayerDetailsComponent implements OnInit {
   playerId: string;
   playerStats: PlayerStats;
   statsExpanded = false;
+
+  messages: string[] = [];
+
+  /*
+    HO: string;
+    HI: string;
+    GO: string;
+    GI: string;
+    CO: string;
+    CI: string;
+  };
+  */
+
   constructor(private playersService: PlayersService, private route: ActivatedRoute) {
   }
 
@@ -31,12 +44,43 @@ export class PlayerDetailsComponent implements OnInit {
     });
     this.playersService.getPlayerStats(this.playerId).subscribe(onePlayerStats => {
       this.playerStats = onePlayerStats[0];
+
+      this.messages.push(this.playerStatsConcluson('hard outdor', onePlayerStats[0].hard_out));
+      this.messages.push(this.playerStatsConcluson('hard indor', onePlayerStats[0].hard_in));
+      this.messages.push(this.playerStatsConcluson('grass outdor', onePlayerStats[0].grass_out));
+      this.messages.push(this.playerStatsConcluson('grass indor', onePlayerStats[0].grass_in));
+      this.messages.push(this.playerStatsConcluson('clay outdor', onePlayerStats[0].clay_out));
+      this.messages.push(this.playerStatsConcluson('clay indor', onePlayerStats[0].clay_in));
+      /*
+      this.messages.HO = this.playerStatsConcluson('HO', onePlayerStats[0].hard_out);
+      this.messages.HI = this.playerStatsConcluson('HI', onePlayerStats[0].hard_in);
+      this.messages.GO = this.playerStatsConcluson('GO', onePlayerStats[0].grass_out);
+      this.messages.GI = this.playerStatsConcluson('GI', onePlayerStats[0].grass_in);
+      this.messages.CO = this.playerStatsConcluson('CO', onePlayerStats[0].clay_out);
+      this.messages.CI = this.playerStatsConcluson('CI', onePlayerStats[0].clay_in);
+      */
     });
+
   }
 
   toggle() {
     this.statsExpanded = !this.statsExpanded;
     console.log(this.playerStats);
+    console.log(this.messages);
+  }
+
+  playerStatsConcluson(statName: string, statValue: number) {
+    if (statValue > 0.75) {
+      return ('++ This player is doing very well on ' + statName + ' court.');
+    } else if (statValue > 0.6) {
+      return ('+ This player is doing rather good on ' + statName + ' court.');
+    } else if (statValue > 0.3) {
+      return ('- This player is doing average on ' + statName + ' court.');
+    } else if (statValue === 0) {
+      return (' This player doesn\'t play on ' + statName + ' court.');
+    } else {
+      return ('-- This player is doing poorly on ' + statName + ' court.');
+    }
   }
 
   playerReport() {
