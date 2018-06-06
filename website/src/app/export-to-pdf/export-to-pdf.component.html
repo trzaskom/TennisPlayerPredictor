@@ -1,8 +1,8 @@
-<div class="row">
+<div class="row ">
   <div class="col s12 m8 offset-m2">
     <ul class="collection with-header">
 
-      <li class="collection-header center-align">
+      <li class="collection-header center-align card-bg-color">
         <h4>Available reports</h4>
       </li>
 
@@ -47,7 +47,7 @@
 
           <div *ngIf="tournaments; else loadingTournaments">
             <p class="flow-text">
-              Generate raport for 100 best players
+              Generate raport for all tournaments
             </p>
             <button (click)="downloadTournamentsPdf()" class="indigo darken-2 waves-effect waves-light btn export-button">Tournaments</button>
           </div>

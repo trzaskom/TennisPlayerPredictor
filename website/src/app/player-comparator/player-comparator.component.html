@@ -1,0 +1,131 @@
+<div *ngIf="players; else loadingPlayers">
+
+  <div class="row">
+    <div class="col s12 m8 offset-m2 center">
+
+      <!-- LEFT PLAYER -->
+      <div class="col s12 m6 center">
+        <div class="input-field col s12">
+          <ng-autocomplete (selected)="selectFirstPlayer($event)" [group]="group"></ng-autocomplete>
+        </div>
+
+        <div *ngIf="firstPlayerStats">
+          <!-- HEXAGON -->
+          <app-drav-hexagon [playerStats]='firstPlayerStats' [scale]=0.82></app-drav-hexagon>
+          <!-- END HEXAGON -->
+        </div>
+      </div>
+      <!-- END LEFT PLAYER -->
+
+      <!-- RIGHT PLAYER -->
+      <div class="col s12 m6 center">
+        <div class="input-field col s12">
+          <ng-autocomplete (selected)="selectSecondPlayer($event)" [group]="group"></ng-autocomplete>
+        </div>
+
+        <div *ngIf="secondPlayerStats">
+          <!-- HEXAGON -->
+          <app-drav-hexagon [playerStats]='secondPlayerStats' [scale]=0.82></app-drav-hexagon>
+          <!-- END HEXAGON -->
+        </div>
+      </div>
+      <!-- END RIGHT PLAYER -->
+
+      <!-- SELECT CONDTION AND SURFACE -->
+      <div *ngIf="firstPlayerStats && secondPlayerStats">
+        <div>
+          <label>
+            <input name="condition" type="radio" (click)="setCondition(conditions[0])" />
+            <span>{{conditions[0]}}</span>
+          </label>
+          <label>
+            <input name="condition" type="radio" (click)="setCondition(conditions[1])" />
+            <span>{{conditions[1]}}</span>
+          </label>
+        </div>
+        <div class="margin-20">
+          <label>
+            <input name="surfaces" type="radio" (click)="setSurface(surfaces[0])" />
+            <span>{{surfaces[0]}}</span>
+          </label>
+          <label>
+            <input class="radio-size-color" name="surfaces" type="radio" (click)="setSurface(surfaces[1])" />
+            <span>{{surfaces[1]}}</span>
+          </label>
+          <label>
+            <input name="surfaces" type="radio" (click)="setSurface(surfaces[2])" />
+            <span>{{surfaces[2]}}</span>
+          </label>
+          <div>
+            <button (click)="solveWinner()" class="indigo darken-2 waves-effect waves-light btn margin-20">Predict</button>
+          </div>
+        </div>
+      </div>
+      <!-- END SELECT CONDTION AND SURFACE -->
+
+      <!-- PREDICT RESULTS -->
+      <div *ngIf="condition && surface && !notEnoughData">
+        <ul class="collection with-header font-big">
+          <li class="collection-header center-align card-bg-color">
+            <h4>Win chance on
+              <span class="font-bold">{{surface}}</span> and
+              <span class="font-bold">{{condition}}</span>
+            </h4>
+          </li>
+          <li class="collection-item card-bg-color">
+            <div class="row">
+              <div class="col s12 m6 center">
+                <p class="flow-text">
+                  {{firstPlayer.name}}:
+                  <span class="font-bold">{{playerChanceWin[0] | number}}%</span>
+                </p>
+              </div>
+
+              <div class="col s12 m6 center">
+                <p class="flow-text">
+                  {{secondPlayer.name}}:
+                  <span class="font-bold">{{playerChanceWin[1] | number}}%</span>
+                </p>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <!-- END PREDICT RESULTS -->
+
+      <!-- NOT ENOUGH DATA -->
+      <div *ngIf="notEnoughData">
+        <ul class="collection with-header font-big">
+          <li class="collection-header center-align">
+            <h4>Not enought data to predict winner!</h4>
+          </li>
+        </ul>
+      </div>
+      <!-- END NOT ENOUGH DATA -->
+
+    </div>
+  </div>
+</div>
+
+
+<!-- LOADING DATA -->
+<ng-template #loadingPlayers>
+  <div class="row">
+    <div class="col s12 m6 offset-m3 center">
+      <div class="preloader-wrapper big active">
+        <div class="spinner-layer spinner-blue-only">
+          <div class="circle-clipper left">
+            <div class="circle"></div>
+          </div>
+          <div class="gap-patch">
+            <div class="circle"></div>
+          </div>
+          <div class="circle-clipper right">
+            <div class="circle"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+<!-- END LOADING DATA -->

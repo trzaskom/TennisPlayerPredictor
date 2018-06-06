@@ -1,4 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
+
 * {
   margin: 0px;
   padding: 0px;
@@ -8,3 +9,6 @@ body {
   background-color: #e8eaf6;
 }
 
+.card-bg-color {
+  background-color: #c5cae9;
+}

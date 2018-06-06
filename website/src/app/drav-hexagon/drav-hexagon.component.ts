@@ -13,6 +13,9 @@ export class DravHexagonComponent implements OnInit {
   @Input()
   playerStats: PlayerStats;
 
+  @Input()
+  scale: number;
+
   @ViewChild('myCanvas') canvasRef: ElementRef;
 
   constructor() { }
@@ -23,71 +26,72 @@ export class DravHexagonComponent implements OnInit {
     // canvas settings
     ctx.fillStyle = '#66bb6a'; // sets the color to fill in the rectangle with
     ctx.strokeStyle = '#303f9f'; // sets the color to fill in the rectangle with
-    ctx.lineWidth = 3;
+    ctx.lineWidth = this.scale * 3;
     // players stats on hexagon
     ctx.beginPath();
-    ctx.moveTo(225, 250 - this.playerStats.grass_out * 200);
-    ctx.lineTo(225 + this.playerStats.clay_out * 173.2, 250 - this.playerStats.clay_out * 100);
-    ctx.lineTo(225 + this.playerStats.clay_in * 173.2, 250 + this.playerStats.clay_in * 100);
-    ctx.lineTo(225, 250 + this.playerStats.grass_in * 100);
-    ctx.lineTo(225 - this.playerStats.hard_in * 173.2, 250 + this.playerStats.hard_in * 100);
-    ctx.lineTo(225 - this.playerStats.hard_out * 173.2, 250 - this.playerStats.hard_out * 100);
+    ctx.moveTo(this.scale * 225, this.scale * (250 - this.playerStats.grass_out * 200));
+    ctx.lineTo(this.scale * (225 + this.playerStats.clay_out * 173.2), this.scale * (250 - this.playerStats.clay_out * 100));
+    ctx.lineTo(this.scale * (225 + this.playerStats.clay_in * 173.2), this.scale * (250 + this.playerStats.clay_in * 100));
+    ctx.lineTo(this.scale * 225, this.scale * (250 + this.playerStats.grass_in * 100));
+    ctx.lineTo(this.scale * (225 - this.playerStats.hard_in * 173.2), this.scale * (250 + this.playerStats.hard_in * 100));
+    ctx.lineTo(this.scale * (225 - this.playerStats.hard_out * 173.2), this.scale * (250 - this.playerStats.hard_out * 100));
     ctx.closePath();
     ctx.stroke();
     ctx.fill();
     // outside hexagon
     ctx.beginPath();
-    ctx.moveTo(225, 50);
-    ctx.lineTo(398.2, 150);
-    ctx.lineTo(398.2, 350);
-    ctx.lineTo(225, 450);
-    ctx.lineTo(51.8, 350);
-    ctx.lineTo(51.8, 150);
+    ctx.moveTo(this.scale * 225, this.scale * 50);
+    ctx.lineTo(this.scale * 398.2, this.scale * 150);
+    ctx.lineTo(this.scale * 398.2, this.scale * 350);
+    ctx.lineTo(this.scale * 225, this.scale * 450);
+    ctx.lineTo(this.scale * 51.8, this.scale * 350);
+    ctx.lineTo(this.scale * 51.8, this.scale * 150);
     ctx.closePath();
     ctx.stroke();
     // inside hexagon
     ctx.beginPath();
-    ctx.moveTo(225, 150);
-    ctx.lineTo(311.6, 200);
-    ctx.lineTo(311.6, 300);
-    ctx.lineTo(225, 350);
-    ctx.lineTo(138.4, 300);
-    ctx.lineTo(138.4, 200);
+    ctx.moveTo(this.scale * 225, this.scale * 150);
+    ctx.lineTo(this.scale * 311.6, this.scale * 200);
+    ctx.lineTo(this.scale * 311.6, this.scale * 300);
+    ctx.lineTo(this.scale * 225, this.scale * 350);
+    ctx.lineTo(this.scale * 138.4, this.scale * 300);
+    ctx.lineTo(this.scale * 138.4, this.scale * 200);
     ctx.closePath();
     ctx.stroke();
     // lines inside
-    ctx.lineWidth = 1.5;
-    ctx.moveTo(225, 250);
-    ctx.lineTo(225 + this.playerStats.clay_out * 173.2, 250 - this.playerStats.clay_out * 100);
-    ctx.moveTo(225, 250);
-    ctx.lineTo(225 + this.playerStats.clay_in * 173.2, 250 + this.playerStats.clay_in * 100);
-    ctx.moveTo(225, 250);
-    ctx.lineTo(225, 250 + this.playerStats.grass_in * 100);
-    ctx.moveTo(225, 250);
-    ctx.lineTo(225 - this.playerStats.hard_in * 173.2, 250 + this.playerStats.hard_in * 100);
-    ctx.moveTo(225, 250);
-    ctx.lineTo(225 - this.playerStats.hard_out * 173.2, 250 - this.playerStats.hard_out * 100);
-    ctx.moveTo(225, 250);
-    ctx.lineTo(225, 250 - this.playerStats.grass_out * 200);
+    ctx.lineWidth = this.scale * 1.5;
+    ctx.moveTo(this.scale * 225, this.scale * 250);
+    ctx.lineTo(this.scale * (225 + this.playerStats.clay_out * 173.2), this.scale * (250 - this.playerStats.clay_out * 100));
+    ctx.moveTo(this.scale * 225, this.scale * 250);
+    ctx.lineTo(this.scale * (225 + this.playerStats.clay_in * 173.2), this.scale * (250 + this.playerStats.clay_in * 100));
+    ctx.moveTo(this.scale * 225, this.scale * 250);
+    ctx.lineTo(this.scale * 225, this.scale * (250 + this.playerStats.grass_in * 100));
+    ctx.moveTo(this.scale * 225, this.scale * 250);
+    ctx.lineTo(this.scale * (225 - this.playerStats.hard_in * 173.2), this.scale * (250 + this.playerStats.hard_in * 100));
+    ctx.moveTo(this.scale * 225, this.scale * 250);
+    ctx.lineTo(this.scale * (225 - this.playerStats.hard_out * 173.2), this.scale * (250 - this.playerStats.hard_out * 100));
+    ctx.moveTo(this.scale * 225, this.scale * 250);
+    ctx.lineTo(this.scale * 225, this.scale * (250 - this.playerStats.grass_out * 200));
     ctx.stroke();
     // text
     ctx.fillStyle = '#000000';
     ctx.textAlign = 'center';
-    ctx.font = '24px serif';
+    const font = this.scale * 24;
+    ctx.font = font + 'px serif';
 
-    ctx.moveTo(225, 50);
-    ctx.lineTo(398.2, 150);
-    ctx.lineTo(398.2, 350);
-    ctx.lineTo(225, 450);
-    ctx.lineTo(51.8, 350);
-    ctx.lineTo(51.8, 150);
+    ctx.moveTo(this.scale * 225, this.scale * 50);
+    ctx.lineTo(this.scale * 398.2, this.scale * 150);
+    ctx.lineTo(this.scale * 398.2, this.scale * 350);
+    ctx.lineTo(this.scale * 225, this.scale * 450);
+    ctx.lineTo(this.scale * 51.8, this.scale * 350);
+    ctx.lineTo(this.scale * 51.8, this.scale * 150);
 
-    ctx.fillText('GO', 225, 40);
-    ctx.fillText('CO', 420, 155);
-    ctx.fillText('CI', 415, 365);
-    ctx.fillText('GI', 225, 475);
-    ctx.fillText('HI', 30, 365);
-    ctx.fillText('HO', 30, 155);
+    ctx.fillText('GO', this.scale * 225, this.scale * 40);
+    ctx.fillText('CO', this.scale * 420, this.scale * 155);
+    ctx.fillText('CI', this.scale * 415, this.scale * 365);
+    ctx.fillText('GI', this.scale * 225, this.scale * 475);
+    ctx.fillText('HI', this.scale * 30, this.scale * 365);
+    ctx.fillText('HO', this.scale * 30, this.scale * 155);
   }
 
 }

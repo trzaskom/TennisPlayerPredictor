@@ -28,3 +28,8 @@
 .table-header-color {
   background-color: #c5cae9;
 }
+
+#player-canvas {
+  width: 450px;
+  height: 500px;
+}

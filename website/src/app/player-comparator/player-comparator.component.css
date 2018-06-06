@@ -1,0 +1,19 @@
+.font-big {
+  font-size: 30px;
+}
+
+.font-bold {
+  font-weight: bold;
+}
+
+[type="radio"]:checked+label:after,
+[type="radio"].with-gap:checked+label:before,
+[type="radio"].with-gap:checked+label:after
+{
+  background-color: #303f9f;
+}
+
+.margin-20 {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}

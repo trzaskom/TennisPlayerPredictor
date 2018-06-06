@@ -19,6 +19,9 @@ import { PlayersService } from './players.service';
 import { DravHexagonComponent } from './drav-hexagon/drav-hexagon.component';
 import { ExportToPdfComponent } from './export-to-pdf/export-to-pdf.component';
 import { TournamentsService } from './tournaments.service';
+import { PlayerComparatorComponent } from './player-comparator/player-comparator.component';
+
+import { NgAutoCompleteModule } from 'ng-auto-complete';
 
 const routes: Routes = [
   {
@@ -42,6 +45,10 @@ const routes: Routes = [
     component: ReportsComponent
   },
   {
+    path: 'compare',
+    component: PlayerComparatorComponent
+  },
+  {
     path: '**',
     component: PageNotFoundComponent
   }
@@ -58,12 +65,14 @@ const routes: Routes = [
     PageNotFoundComponent,
     PlayerDetailsComponent,
     DravHexagonComponent,
-    ExportToPdfComponent
+    ExportToPdfComponent,
+    PlayerComparatorComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     MaterialModule,
+    NgAutoCompleteModule,
     RouterModule.forRoot(routes)
   ],
   exports: [
